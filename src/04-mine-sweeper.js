@@ -22,25 +22,44 @@
  * ]
  */
 function minesweeper(matrix) {
-  const arr = matrix;
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+  const arr = [];
+  for (let i = 0; i < matrix.length; i++) {
+    arr[i] = [];
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
       arr[i][j] = 0;
     }
   }
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      if (typeof matrix[i + 1][j] !== 'undefined' && matrix[i + 1][j] === 'true') {
-        arr[i][j]++;
-      }
-      if (typeof matrix[i - 1][j] !== 'undefined' && matrix[i - 1][j] === 'true') {
-        arr[i][j]++;
-      }
-      if (typeof matrix[i][j + 1] !== 'undefined' && matrix[i][j + 1] === 'true') {
-        arr[i][j]++;
-      }
-      if (typeof matrix[i][j - 1] !== 'undefined' && matrix[i][j - 1] === 'true') {
-        arr[i][j]++;
+      if (matrix[i][j] === true) {
+        arr[i][j] = 1;
+      } else {
+        if (i < matrix.length - 1 && matrix[i + 1][j] === true) {
+          arr[i][j] += 1;
+        }
+        if (i < matrix.length - 1 && matrix[i + 1][j + 1] === true) {
+          arr[i][j] += 1;
+        }
+        if (i < matrix.length - 1 && matrix[i + 1][j - 1] === true) {
+          arr[i][j] += 1;
+        }
+        if (matrix[i][j + 1] === true) {
+          arr[i][j] += 1;
+        }
+        if (matrix[i][j - 1] === true) {
+          arr[i][j] += 1;
+        }
+        if (i > 0 && matrix[i - 1][j] === true) {
+          arr[i][j] += 1;
+        }
+        if (i > 0 && matrix[i - 1][j + 1] === true) {
+          arr[i][j] += 1;
+        }
+        if (i > 0 && matrix[i - 1][j - 1] === true) {
+          arr[i][j] += 1;
+        }
       }
     }
   }
